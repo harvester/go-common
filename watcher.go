@@ -12,13 +12,14 @@ import (
 func WatchDBusSignal(ctx context.Context, iface, objPath string, handlerFunc func(s *dbus.Signal)) {
 	conn, err := generateDBUSConnection()
 	if err != nil {
-		return
+		panic(err)
 	}
 
 	matchInterFace := dbus.WithMatchInterface(iface)
 	matchObjPath := dbus.WithMatchObjectPath(dbus.ObjectPath(objPath))
 	err = conn.AddMatchSignalContext(ctx, matchObjPath, matchInterFace)
 	if err != nil {
+		logrus.Errorf("Add match signal failed. err: %v", err)
 		panic(err)
 	}
 
@@ -51,19 +52,19 @@ func WatchFileChange(ctx context.Context, handlerFunc func(eventType string), mo
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		logrus.Errorf("failed to creating a fsnotify watcher: %v", err)
-		return
+		panic(err)
 	}
 	defer watcher.Close()
 
 	for _, target := range monitorTargets {
 		_, err = os.Stat(target)
 		if err != nil {
-			logrus.Errorf("failed to stat file %s: %v", target, err)
+			logrus.Errorf("failed to stat file/directory %s: %v", target, err)
 			continue
 		}
 		err := watcher.Add(target)
 		if err != nil {
-			logrus.Errorf("failed to add file %s to watcher: %v", target, err)
+			logrus.Errorf("failed to add file/directory %s to watcher: %v", target, err)
 			continue
 		}
 	}
