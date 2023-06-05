@@ -98,11 +98,14 @@ func GenerateTempFileFullOptions(buf []byte, prefix, dirPath string, perm fs.Fil
 }
 
 func BackupFile(source string) (string, error) {
-	return BackupFileToDir(source, "")
+	return BackupFileToDirWithSuffix(source, "", "bak")
 }
 
 func BackupFileToDir(sourcePath, dstDir string) (string, error) {
+	return BackupFileToDirWithSuffix(sourcePath, dstDir, "bak")
+}
 
+func BackupFileToDirWithSuffix(sourcePath, dstDir, suffix string) (string, error) {
 	srcStat, err := os.Stat(sourcePath)
 	if err != nil {
 		logrus.Errorf("Stat file failed. err: %v", err)
@@ -121,12 +124,10 @@ func BackupFileToDir(sourcePath, dstDir string) (string, error) {
 	defer src.Close()
 
 	// if disDir is nil, keep the backup file in the same directory
-	dstPath := ""
-	if dstDir == "" {
-		dstPath = fmt.Sprintf("%s.bak", sourcePath)
-	} else {
+	dstPath := fmt.Sprintf("%s.%s", sourcePath, suffix)
+	if dstDir != "" {
 		sourceFileName := GetFileName(sourcePath)
-		dstPath = fmt.Sprintf("%s/%s.bak", dstDir, sourceFileName)
+		dstPath = fmt.Sprintf("%s/%s.%s", dstDir, sourceFileName, suffix)
 	}
 
 	dst, err := os.Create(dstPath)
@@ -142,7 +143,6 @@ func BackupFileToDir(sourcePath, dstDir string) (string, error) {
 		return "", err
 	}
 	return dstPath, nil
-
 }
 
 func RemoveFiles(path ...string) error {
