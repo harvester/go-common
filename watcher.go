@@ -26,7 +26,7 @@ func WatchDBusSignal(ctx context.Context, iface, objPath string, handlerFunc fun
 	signals := make(chan *dbus.Signal, 2)
 	conn.Signal(signals)
 
-	logrus.Infof("Watch DBus signal...")
+	logrus.Infof("Watch DBus signal with interface: %s, object path: %s", iface, objPath)
 	for {
 		select {
 		case signalContent := <-signals:
