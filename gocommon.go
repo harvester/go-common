@@ -17,7 +17,6 @@
  * Copyright 2023 SUSE, LLC.
  *
  */
-/*
- * Dummy package
- */
+
+// Dummy package
 package gocommon
