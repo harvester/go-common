@@ -8,6 +8,7 @@ require (
 	github.com/godbus/dbus/v5 v5.0.4
 	github.com/sirupsen/logrus v1.9.2
 	github.com/stretchr/testify v1.7.0
+	golang.org/x/exp v0.0.0-20231206192017-f3f8817b8deb
 	gopkg.in/yaml.v3 v3.0.1
 )
 
