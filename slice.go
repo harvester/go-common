@@ -1,6 +1,6 @@
 package gocommon
 
-import "golang.org/x/exp/slices"
+import "slices"
 
 // SliceContentCmp compares two slices and returns true if they have the same content with any order.
 func SliceContentCmp[T comparable](x, y []T) bool {
