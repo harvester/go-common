@@ -43,3 +43,14 @@ func SliceDedupe[T comparable](x []T) []T {
 	}
 	return result
 }
+
+// SliceMapFunc creates a new slice of values by running each element in the
+// slice through function f. The function f is invoked with two arguments:
+// (value, index).
+func SliceMapFunc[S ~[]E, E any](s S, f func(E, int) E) S {
+	r := make(S, len(s))
+	for i, v := range s {
+		r[i] = f(v, i)
+	}
+	return r
+}

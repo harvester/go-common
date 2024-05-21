@@ -1,6 +1,7 @@
 package gocommon
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -76,4 +77,16 @@ func (s *SliceFuncs) TestSliceDedupeString() {
 	require.Equal(s.T(), []string{"foo", "bar", "roll"}, SliceDedupe(a), "SliceDedupe should return the same slice with {foo, bar, roll}")
 	require.Equal(s.T(), []string{"apple", "book", "clock", "duck", "escape", "field"}, SliceDedupe(b), "SliceDedupe should return the same slice with {apple, book, clock, duck, escape, field}")
 	require.Equal(s.T(), []string{"foo", "bar", "roll", "desk"}, SliceDedupe(c), "SliceDedupe should return the same slice with {foo, bar, roll, desk}")
+}
+
+func (s *SliceFuncs) TestSliceMapFunc() {
+	a := []int{1, 2, 3}
+	b := []string{"a", " b", " c "}
+
+	require.Equal(s.T(), []int{2, 4, 6}, SliceMapFunc(a, func(v int, _ int) int {
+		return v * 2
+	}), "SliceMapFunc should return {2, 4, 6}")
+	require.Equal(s.T(), []string{"a", "b", "c"}, SliceMapFunc(b, func(v string, _ int) string {
+		return strings.TrimSpace(v)
+	}), "SliceMapFunc should return {\"a\", \"b\", \"c\"}")
 }
