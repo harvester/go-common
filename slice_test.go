@@ -90,3 +90,13 @@ func (s *SliceFuncs) TestSliceMapFunc() {
 		return strings.TrimSpace(v)
 	}), "SliceMapFunc should return {\"a\", \"b\", \"c\"}")
 }
+
+func (s *SliceFuncs) TestSliceFindDuplicates() {
+	a := []string{"foo", "bar", "bar", "foo", "roll", "roll"}
+	b := []string{"apple", "book", "clock", "duck", "escape", "field"}
+	c := []string{"foo", "bar", "roll", "roll", "desk"}
+
+	require.ElementsMatch(s.T(), []string{"foo", "bar", "roll"}, SliceFindDuplicates(a), "SliceFindDuplicates should return elements: {foo, bar, roll}")
+	require.ElementsMatch(s.T(), []string{}, SliceFindDuplicates(b), "SliceFindDuplicates should return elements: {}")
+	require.ElementsMatch(s.T(), []string{"roll"}, SliceFindDuplicates(c), "SliceFindDuplicates should return elements: {roll}")
+}
