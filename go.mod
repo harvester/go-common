@@ -13,6 +13,8 @@ require (
 
 require github.com/prometheus/procfs v0.15.1
 
+require github.com/pkg/errors v0.9.1
+
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/davecgh/go-spew v1.1.1 // indirect
