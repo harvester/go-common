@@ -18,5 +18,5 @@
  *
  */
 
-// Dummy package
+// The general golang packages that are used in the harvester project.
 package gocommon
