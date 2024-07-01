@@ -1,4 +1,4 @@
-package gocommon
+package files
 
 import (
 	"fmt"
