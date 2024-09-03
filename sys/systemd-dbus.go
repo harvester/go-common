@@ -15,6 +15,7 @@ func RestartService(unit string) error {
 		logrus.Errorf("Failed to create new connection for systemd. err: %v", err)
 		return err
 	}
+	defer conn.Close()
 	responseChan := make(chan string, 1)
 	if _, err := conn.RestartUnitContext(ctx, unit, "fail", responseChan); err != nil {
 		logrus.Errorf("Failed to restart service %s. err: %v", unit, err)
@@ -32,6 +33,7 @@ func TryRestartService(unit string) error {
 		logrus.Errorf("Failed to create new connection for systemd. err: %v", err)
 		return err
 	}
+	defer conn.Close()
 	responseChan := make(chan string, 1)
 	if _, err := conn.TryRestartUnitContext(ctx, unit, "fail", responseChan); err != nil {
 		logrus.Errorf("Failed to restart service %s. err: %v", unit, err)
