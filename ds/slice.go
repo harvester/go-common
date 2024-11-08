@@ -74,3 +74,13 @@ func SliceFindDuplicates[S ~[]E, E comparable](s S) S {
 
 	return duplicates
 }
+
+// SliceContains checks if a slice contains a target item v.
+func SliceContains[T comparable](s []T, v T) bool {
+	for _, item := range s {
+		if item == v {
+			return true
+		}
+	}
+	return false
+}

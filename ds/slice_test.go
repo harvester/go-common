@@ -100,3 +100,13 @@ func (s *SliceFuncs) TestSliceFindDuplicates() {
 	require.ElementsMatch(s.T(), []string{}, SliceFindDuplicates(b), "SliceFindDuplicates should return elements: {}")
 	require.ElementsMatch(s.T(), []string{"roll"}, SliceFindDuplicates(c), "SliceFindDuplicates should return elements: {roll}")
 }
+
+func (s *SliceFuncs) TestSliceContainsInt() {
+	a := []int{1, 2, 3}
+	b := []string{"apple", "book", "clock", "duck"}
+
+	require.Equal(s.T(), true, SliceContains(a, 1), "SliceContains should return true")
+	require.Equal(s.T(), false, SliceContains(a, 4), "SliceContains should return false")
+	require.Equal(s.T(), true, SliceContains(b, "book"), "SliceContains should return true")
+	require.Equal(s.T(), false, SliceContains(b, "escape"), "SliceContains should return false")
+}
