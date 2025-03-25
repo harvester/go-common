@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 )
 
 // GetNamespacedName returns the namespaced name of the object.
@@ -17,7 +18,10 @@ func GetNamespacedName[T any](t T) (string, error) {
 		if obj.GetName() == "" {
 			return "", fmt.Errorf("input object type: %T should have name", t)
 		}
-		return fmt.Sprintf("%s/%s", obj.GetNamespace(), obj.GetName()), nil
+		return types.NamespacedName{
+			Namespace: obj.GetNamespace(),
+			Name:      obj.GetName(),
+		}.String(), nil
 	default:
 		return "", fmt.Errorf("unsupported object type: %T", t)
 	}
