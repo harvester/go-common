@@ -1,20 +1,29 @@
+version: 2
 linters:
   disable-all: true
   enable:
-    - goimports
-    - gofmt
-    - misspell
-    - revive
+    - errcheck
+    - govet
     - gosec
+    - ineffassign
+    - staticcheck
+    - unused
+    - misspell
     - prealloc
-issues:
+  formatters:
+    enable:
+      - gofmt
   exclude-files:
     - /zz_generated_
     - _generated
   exclude-dirs:
     - generated
+  exclusions:
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
 run:
   timeout: 5m
   tests: true
-  build-tags:
-    - test
