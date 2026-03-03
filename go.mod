@@ -1,6 +1,6 @@
 module github.com/harvester/go-common
 
-go 1.25
+go 1.25.7
 
 require (
 	github.com/coreos/go-systemd/v22 v22.6.0
