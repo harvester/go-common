@@ -5,7 +5,7 @@ RUN zypper -n rm container-suseconnect && \
     zypper -n clean -a
 
 ## install golangci
-COPY --from=golangci/golangci-lint:v2.11.4-alpine@sha256:72bcd68512b4e27540dd3a778a1b7afd45759d8145cfb3c089f1d7af53e718e9 \
+COPY --from=golangci/golangci-lint:v2.12.2-alpine@sha256:91b27804074a0bacea298707f016911e60cf0cdbc6c7bf5ccacb5f0606d18d60 \
     /usr/bin/golangci-lint /usr/local/bin/golangci-lint
 
 WORKDIR /go/src/github.com/harvester/go-common/
