@@ -16,7 +16,7 @@ require github.com/prometheus/procfs v0.17.0
 require github.com/pkg/errors v0.9.1
 
 require (
-	github.com/Masterminds/semver/v3 v3.4.0
+	github.com/Masterminds/semver/v3 v3.5.0
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
