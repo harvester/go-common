@@ -4,7 +4,7 @@ go 1.25.7
 
 require (
 	github.com/coreos/go-systemd/v22 v22.6.0
-	github.com/fsnotify/fsnotify v1.9.0
+	github.com/fsnotify/fsnotify v1.10.1
 	github.com/godbus/dbus/v5 v5.1.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.11.1
