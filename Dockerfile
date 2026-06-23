@@ -1,4 +1,5 @@
-FROM registry.suse.com/bci/golang:1.25.7 AS builder
+FROM registry.suse.com/bci/golang:1.25 AS builder
+ENV GOTOOLCHAIN=auto
 
 RUN zypper -n rm container-suseconnect && \
     zypper -n install git curl gzip tar wget awk && \
