@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	defaultFilePerm = 0644
+	defaultFilePerm = 0600
 	defaultTempDir  = "/tmp"
 )
 
@@ -136,6 +136,11 @@ func BackupFileToDirWithSuffix(sourcePath, dstDir, suffix string) (string, error
 		return "", err
 	}
 	defer dst.Close()
+
+	// Inherit file permissions from source file
+	if err = os.Chmod(dstPath, srcStat.Mode()); err != nil {
+		return "", err
+	}
 
 	_, err = io.Copy(dst, src)
 	if err != nil {
