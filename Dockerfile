@@ -1,4 +1,4 @@
-FROM registry.suse.com/bci/golang:1.25 AS builder
+FROM registry.suse.com/bci/golang:1.26 AS builder
 ENV GOTOOLCHAIN=auto
 
 RUN zypper -n rm container-suseconnect && \
